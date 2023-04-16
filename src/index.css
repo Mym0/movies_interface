@@ -1,0 +1,28 @@
+.text-gradient {
+  color: gold;
+  background-image: -webkit-linear-gradient(45deg, gold 16%, black 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.link-gradient {
+    color: #fff;
+    background-image: linear-gradient(to right, #333 , gold);
+    border: 1px solid gold;
+    color: white;
+    padding: 12px 36px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 500ms ease; 
+
+  }
+
+  .link-gradient:hover {
+    color: white;
+    transform: scale(1.1) translate(0px,-3px);
+    background-image: linear-gradient(to left, #333 , gold);
+  }
