@@ -28,10 +28,12 @@ const Header = () => {
               Watch List
             </NavLink>
           </Nav>
-          <Link to='/login' className="me-5 link-gradient">
+          <Link to="/login" className="me-5 link-gradient">
             Login
           </Link>
-          <Link to='/register' className='link-gradient'>Register</Link>
+          <Link to="/register" className="link-gradient">
+            Register
+          </Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
