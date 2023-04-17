@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Badge } from 'react-bootstrap';
 import ReviewForm from '../reviewForm/ReviewForm';
 import React from 'react';
 import addReviewApi from '../../api/addReview';
-
+import getSingleMovieApi from '../../api/getSingleMovie'
 const Reviews = () => {
   const [movie, setMovie] = useState({});
   const [reviews, setReviews] = useState([]);
@@ -13,10 +13,16 @@ const Reviews = () => {
   let params = useParams();
   const movieId = params.movieId;
 
-  useEffect(async () => {
-    const singleMovie = await getSingleMovieApi(movieId);
-    setMovie(singleMovie);
-    setReviews(singleMovie.reviews);
+  useEffect(() => {
+    async function fetchData() {
+      const singleMovie = await getSingleMovieApi(movieId);
+      console.log(
+        singleMovie,'singleMovie'
+      );
+      setMovie(singleMovie);
+      setReviews(singleMovie.reviews);
+    }
+    fetchData();
   }, []);
 
   const addReview = async (e) => {
@@ -84,6 +90,14 @@ const Reviews = () => {
       <Row>
         <Col>
           <hr />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+        {movie?.genres.map((genre)=>(
+             <Badge bg="warning" className='me-3'>{genre}</Badge>
+        )
+          )}
         </Col>
       </Row>
     </Container>

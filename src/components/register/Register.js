@@ -2,15 +2,25 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import registerUserApi from "../../api/registerUser";
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit =async (data) => {
     console.log(data);
+    localStorage.removeItem('token');
+    const { token } = await registerUserApi(data);
+    if (token) {
+      localStorage.setItem('token', token);
+      navigate('/');
+    }
   };
 
   return (
@@ -35,7 +45,7 @@ const Register = () => {
                       <Form.Control
                         type="text"
                         placeholder="Enter First Name"
-                        {...register('firstName', { required: true })}
+                        {...register('firstname', { required: true })}
                       />
                       {errors.firstName && (
                         <span className="text-danger">
@@ -51,7 +61,7 @@ const Register = () => {
                       <Form.Control
                         type="text"
                         placeholder="Enter Last Name"
-                        {...register('lastName', { required: true })}
+                        {...register('lastname', { required: true })}
                       />
                       {errors.lastName && (
                         <span className="text-danger">

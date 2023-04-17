@@ -8,16 +8,17 @@ import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import getMoviesApi from '../../api/getMovies';
 
-const Hero = () => {
+const Hero =  () => {
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
+   useEffect(() => {
     async function fetchData() {
       const movies = await getMoviesApi();
       setMovies(movies ? movies : []);
     }
     fetchData();
   }, []);
+
 
   const navigate = useNavigate();
 

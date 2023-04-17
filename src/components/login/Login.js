@@ -2,16 +2,26 @@ import React from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import authneticateUserApi from '../../api/authneticateUser';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-  };
+    const { token } = await authneticateUserApi(data);
+    if (token) {
+      localStorage.setItem('token', token);
+      navigate('/');
+    }
+     
+  }
   return (
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
