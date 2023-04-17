@@ -1,11 +1,11 @@
 import axoisInstance from './axiosConfig';
 
 const getMoviesApi = async () => {
-  const url = '/api/v1/movies';
+  const url = '/movies';
 
   try {
-    const response = await axoisInstance.get(url);
-    return response.data;
+    const res = await axoisInstance().get(url);
+    return res.data;
   } catch (err) {
     console.log(err);
   }
