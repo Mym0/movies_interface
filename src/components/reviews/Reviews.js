@@ -4,7 +4,9 @@ import { Container, Row, Col, Badge } from 'react-bootstrap';
 import ReviewForm from '../reviewForm/ReviewForm';
 import React from 'react';
 import addReviewApi from '../../api/addReview';
-import getSingleMovieApi from '../../api/getSingleMovie'
+import getSingleMovieApi from '../../api/getSingleMovie';
+import Rate from 'rc-rate';
+
 const Reviews = () => {
   const [movie, setMovie] = useState({});
   const [reviews, setReviews] = useState([]);
@@ -16,9 +18,7 @@ const Reviews = () => {
   useEffect(() => {
     async function fetchData() {
       const singleMovie = await getSingleMovieApi(movieId);
-      console.log(
-        singleMovie,'singleMovie'
-      );
+      console.log(singleMovie, 'singleMovie');
       setMovie(singleMovie);
       setReviews(singleMovie.reviews);
     }
@@ -94,10 +94,16 @@ const Reviews = () => {
       </Row>
       <Row>
         <Col>
-        {movie?.genres.map((genre)=>(
-             <Badge bg="warning" className='me-3'>{genre}</Badge>
-        )
-          )}
+          {movie?.genres?.map((genre) => (
+            <Badge bg="warning" className="me-3">
+              {genre}
+            </Badge>
+          ))}
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Rate value={Number(movie.rating)} />
         </Col>
       </Row>
     </Container>
