@@ -1,9 +1,10 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:8080/api/v1/';
+export const baseUrl = 'http://localhost:8080/api/v1/';
 
-const axoisInstance = () => { 
+const axiosInstance = () => { 
   const headers = {}
   const token = localStorage.getItem("token")
+  console.log(token,'token token token tokentoken token token token');
   if (localStorage.getItem("token")) {
     headers['Authorization']=`Bearer ${token}`
   }
@@ -13,6 +14,6 @@ const axoisInstance = () => {
   });
  }
 
-export default axoisInstance;
+export default axiosInstance;
 
 

@@ -1,10 +1,10 @@
-import axoisInstance from './axiosConfig';
+import axiosInstance from './axiosConfig';
 
 const getSingleMovieApi = async (movieId) => {
   const url = `/movies/${movieId}`;
 
   try {
-    const { data } = await axoisInstance().get(url);
+    const { data } = await axiosInstance().get(url);
     return data;
   } catch (err) {
     console.log(err);

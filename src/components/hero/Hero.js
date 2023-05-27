@@ -27,8 +27,8 @@ const Hero =  () => {
   }
 
   return (
-    <div className="movie-carousel-container">
-      <Carousel>
+    <div className="movie-carousel-container" data-testid='carousel'>
+      <Carousel >
         {movies?.map((movie) => {
           return (
             <Paper key={movie.imdbId}>
@@ -39,7 +39,7 @@ const Hero =  () => {
                 >
                   <div className="movie-detail">
                     <div className="movie-poster">
-                      <img src={movie.poster} alt="" />
+                      <img src={movie.poster} alt="movie-poster" />
                     </div>
                     <div className="movie-title">
                       <h4>{movie.title}</h4>
@@ -62,6 +62,7 @@ const Hero =  () => {
                         <Button
                           variant="info"
                           onClick={() => reviews(movie.imdbId)}
+                          data-testid='submit-review'
                         >
                           Reviews
                         </Button>

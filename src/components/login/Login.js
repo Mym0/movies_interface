@@ -11,7 +11,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors,  isDirty, isValid },
   } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
@@ -29,7 +29,7 @@ const Login = () => {
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-md-4 text-black">
-                <h1 className="fw-bold mb-2 text-uppercase text-gradient">
+                <h1 className="fw-bold mb-2 text-uppercase text-gradient" data-testid='login-header'>
                   Login
                 </h1>
                 <p className="mb-3 text-gradient">
@@ -42,6 +42,7 @@ const Login = () => {
                         Email address
                       </Form.Label>
                       <Form.Control
+                      data-testid='input-email'
                         type="email"
                         placeholder="Enter email"
                         {...register('email', { required: true })}
@@ -67,7 +68,11 @@ const Login = () => {
                       )}
                     </Form.Group>
                     <div className="d-grid">
-                      <Button variant="warning" type="submit">
+                      <Button 
+disabled={!isDirty || !isValid} 
+variant="warning"
+                       type="submit"
+                        data-testid='login-button'>
                         Login
                       </Button>
                     </div>
