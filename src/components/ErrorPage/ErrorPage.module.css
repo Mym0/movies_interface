@@ -1,0 +1,101 @@
+.error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+.error__img{
+    display:flex;
+    margin: auto;
+    max-width: 600px;
+    transition: all .3s linear;
+    animation: imageAnimation 1.5s infinite alternate linear;
+    /* margin-top: 200px; */
+    /* margin-bottom: 30px; */
+}
+@keyframes imageAnimation {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(20px);
+    }
+}
+.error__content-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.error__content-title{
+    font-size: 146.5px;
+    font-family: 'RobotoSemiBold';
+    color:#646464;
+    line-height: 140px;
+}
+.error__content-second-title{
+    font-size: 86.5px;
+    font-family: 'RobotoSemiBold';
+    /* color:#F5B453; */
+    color:gold;
+    margin-bottom: 10px;
+}
+.error__content-description{
+    font-size: 26.5px;
+    font-family: 'RobotoSemiBold';
+    color:#828282;
+    margin-bottom: 20px!important;
+}
+.error__content-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    /* background: var(--gradient-color); */
+    background: gold;
+    font-size: 20.06px;
+    font-family: 'RobotoSemiBold';
+    width: 250px;
+    height: 70px;
+    border-radius: 50px;
+    transition: all .3s linear;
+}
+.error__content-link:hover{
+    color:white!important;
+    opacity:.8;
+}
+@media (max-width:991px) {
+    .error{
+        margin-top: 20px;
+    }
+    .error__img{
+        max-width: 250px;
+    }
+    .error__content-wrapper{
+        align-items: center;
+    }
+    .error__content-title{
+        font-size: 80px;
+        margin: 0;
+        line-height: initial;
+        font-family: 'RobotoBold';
+    }
+    .error__content-second-title{
+        font-size: 46.5px;
+        font-family: 'RobotoSemiBold';
+        margin-bottom: 10px;
+    }
+    .error__content-description{
+        font-size: 20px;
+        font-family: 'PoppinsMedium';
+        margin-bottom: 12px;
+        text-align: center;
+    }
+    .error__content-link{
+        font-size: 17.06px;
+        font-family: 'RobotoSemiBold';
+        width: 200px;
+        height: 40px;
+        border-radius: 50px;
+    }
+}
