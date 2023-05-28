@@ -1,27 +1,12 @@
-import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVideoSlash } from '@fortawesome/free-solid-svg-icons';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [token, setToken] = useState('')
-
-useEffect(() => {
-  setToken(localStorage.getItem('token'))
-}, [token])
-
-const navigate = useNavigate();
-
-const handleLogout = () => { 
-  localStorage.removeItem('token');
-  setToken('')
-  navigate('/')
- }
-
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" data-testid='navbar'>
@@ -40,29 +25,19 @@ const handleLogout = () => {
             <NavLink className="nav-link" to="/" data-testid='navbar-link'>
               Home
             </NavLink>
-            <NavLink className="nav-link" to="/watchList" data-testid='navbar-link'>
-              Watch List
+            <NavLink className="nav-link" to="/about-us">
+              About Us
             </NavLink>
-            <NavLink>
-              Bitte eine Review hinterlassen!
+            <NavLink className="nav-link" to="/terms">
+            Terms And Conditions
             </NavLink>
           </Nav>
-          {
-            !token ?
-            <>
           <Link to="/login" className="me-5 link-gradient">
             Login
           </Link>
           <Link to="/register" className="link-gradient">
             Register
-          </Link>    
-            </>
-            :
-            <Link onClick={handleLogout} className="me-5 link-gradient">
-            Logout
           </Link>
-          }
-        
         </Navbar.Collapse>
       </Container>
     </Navbar>

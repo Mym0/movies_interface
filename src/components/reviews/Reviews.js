@@ -6,10 +6,12 @@ import React from 'react';
 import addReviewApi from '../../api/addReview';
 import getSingleMovieApi from '../../api/getSingleMovie';
 import Rate from 'rc-rate';
+import './Reviews.css';
 
 const Reviews = () => {
   const [movie, setMovie] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const revText = useRef();
   let params = useParams();
@@ -32,37 +34,55 @@ const Reviews = () => {
 
     const body = { reviewBody: rev.value, imdbId: movieId };
 
-    addReviewApi(body);
+    setIsSubmitting(true);
+    const addingStatus = await addReviewApi(body);
+    setIsSubmitting(false);
+    if (addingStatus !== false) {
+      const updatedReviews = [...reviews, { body: rev.value }];
 
-    const updatedReviews = [...reviews, { body: rev.value }];
+      rev.value = '';
 
-    rev.value = '';
-
-    setReviews(updatedReviews);
+      setReviews(updatedReviews);
+    }
   };
 
   return (
     <Container>
       <Row>
         <Col>
-          <h3>Reviews</h3>
+          <h3 className="review-title">Reviews</h3>
         </Col>
       </Row>
-      <Row className="mt-2">
+
+      <Row className="my-2">
         <Col>
-          <img src={movie?.poster} alt="" />
+          <img
+            src={movie?.poster}
+            alt="movie-poster"
+            className="review-image"
+          />
+          {movie?.genres?.map((genre) => (
+            <Badge bg="warning" className="review-movie-genre">
+              {genre}
+            </Badge>
+          ))}
         </Col>
         <Col>
-          {
+          <ReviewForm
+            handleSubmit={addReview}
+            isSubmitting={isSubmitting}
+            revText={revText}
+            labelText="Write a Review?"
+          />
+        </Col>
+      </Row>
+      <Row>
+        <hr className='mt-4'/>
+        {reviews?.map((review) => {
+          return (
             <>
               <Row>
-                <Col>
-                  <ReviewForm
-                    handleSubmit={addReview}
-                    revText={revText}
-                    labelText="Write a Review?"
-                  />
-                </Col>
+                <Col>{review?.body}</Col>
               </Row>
               <Row>
                 <Col>
@@ -70,42 +90,16 @@ const Reviews = () => {
                 </Col>
               </Row>
             </>
-          }
-          {reviews?.map((r) => {
-            return (
-              <>
-                <Row>
-                  <Col>{r.body}</Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <hr />
-                  </Col>
-                </Row>
-              </>
-            );
-          })}
-        </Col>
+          );
+        })}
       </Row>
-      <Row>
+
+
+      {/* <Row>
         <Col>
-          <hr />
+          <Rate value={Number(movie?.rating)} />
         </Col>
-      </Row>
-      <Row>
-        <Col>
-          {movie?.genres?.map((genre) => (
-            <Badge bg="warning" className="me-3">
-              {genre}
-            </Badge>
-          ))}
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Rate value={Number(movie.rating)} />
-        </Col>
-      </Row>
+      </Row> */}
     </Container>
   );
 };

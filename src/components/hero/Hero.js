@@ -4,21 +4,19 @@ import { Paper } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import getMoviesApi from '../../api/getMovies';
 
-const Hero =  () => {
+const Hero = () => {
   const [movies, setMovies] = useState([]);
 
-   useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       const movies = await getMoviesApi();
       setMovies(movies ? movies : []);
     }
     fetchData();
   }, []);
-
 
   const navigate = useNavigate();
 
@@ -27,22 +25,22 @@ const Hero =  () => {
   }
 
   return (
-    <div className="movie-carousel-container" data-testid='carousel'>
-      <Carousel >
+    <div className="movie-carousel-container" data-testid="carousel">
+      <Carousel>
         {movies?.map((movie) => {
           return (
             <Paper key={movie.imdbId}>
               <div className="movie-card-container">
                 <div
                   className="movie-card"
-                  style={{ '--img': `url(${movie.backdrops[0]})` }}
+                  style={{ '--img': `url(${movie?.backdrops?.[0]})` }}
                 >
                   <div className="movie-detail">
                     <div className="movie-poster">
                       <img src={movie.poster} alt="movie-poster" />
                     </div>
                     <div className="movie-title">
-                      <h4>{movie.title}</h4>
+                      <h4 className="movie-title-header">{movie.title}</h4>
                     </div>
                     <div className="movie-buttons-container">
                       <Link
@@ -59,13 +57,13 @@ const Hero =  () => {
                       </Link>
 
                       <div className="movie-review-button-container">
-                        <Button
-                          variant="info"
+                        <button
                           onClick={() => reviews(movie.imdbId)}
-                          data-testid='submit-review'
+                          data-testid="submit-review"
+                          className="movie-review-button"
                         >
                           Reviews
-                        </Button>
+                        </button>
                       </div>
                     </div>
                   </div>

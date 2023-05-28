@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import authneticateUserApi from '../../api/authneticateUser';
 import { useNavigate } from 'react-router-dom';
+import ReactLoading from 'react-loading';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors,  isDirty, isValid },
+    formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    setIsSubmitting(true)
     const { token } = await authneticateUserApi(data);
+    setIsSubmitting(false)
+
     if (token) {
       localStorage.setItem('token', token);
       navigate('/');
+    } else {
+      toast.error('Wrong Data');
     }
-     
   }
   return (
     <Container>
@@ -29,7 +35,7 @@ const Login = () => {
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-md-4 text-black">
-                <h1 className="fw-bold mb-2 text-uppercase text-gradient" data-testid='login-header'>
+                <h1 className="fw-bold mb-2 text-uppercase text-gradient">
                   Login
                 </h1>
                 <p className="mb-3 text-gradient">
@@ -42,7 +48,7 @@ const Login = () => {
                         Email address
                       </Form.Label>
                       <Form.Control
-                      data-testid='input-email'
+                        data-testid="input-email"
                         type="email"
                         placeholder="Enter email"
                         {...register('email', { required: true })}
@@ -68,12 +74,22 @@ const Login = () => {
                       )}
                     </Form.Group>
                     <div className="d-grid">
-                      <Button 
-disabled={!isDirty || !isValid} 
-variant="warning"
-                       type="submit"
-                        data-testid='login-button'>
-                        Login
+                      <Button
+                        className="d-flex align-items-center justify-content-center"
+                        variant="warning"
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        {!isSubmitting ? (
+                          'Login'
+                        ) : (
+                          <ReactLoading
+                            type={'spin'}
+                            color={'#ffffff'}
+                            height={30}
+                            width={30}
+                          />
+                        )}
                       </Button>
                     </div>
                   </Form>

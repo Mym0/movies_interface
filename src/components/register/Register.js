@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
-import registerUserApi from "../../api/registerUser";
+import registerUserApi from '../../api/registerUser';
 import { useNavigate } from 'react-router-dom';
+import ReactLoading from 'react-loading';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit =async (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     localStorage.removeItem('token');
+    setIsSubmitting(true);
     const { token } = await registerUserApi(data);
+    setIsSubmitting(false);
     if (token) {
       localStorage.setItem('token', token);
       navigate('/');
+    } else {
+      toast.error('Wrong Data');
     }
   };
 
@@ -100,8 +107,22 @@ const Register = () => {
                       )}
                     </Form.Group>
                     <div className="d-grid">
-                      <Button variant="warning" type="submit">
-                        Register
+                      <Button
+                        className="d-flex align-items-center justify-content-center"
+                        variant="warning"
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        {!isSubmitting ? (
+                          'Register'
+                        ) : (
+                          <ReactLoading
+                            type={'spin'}
+                            color={'#ffffff'}
+                            height={30}
+                            width={30}
+                          />
+                        )}
                       </Button>
                     </div>
                   </Form>

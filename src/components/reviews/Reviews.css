@@ -1,0 +1,14 @@
+.review-title{
+  font-size: 26px;
+  color:white;
+  font-family: 'RobotoBold';
+  margin-top: 20px;
+}
+.review-image{
+  width: 100%;
+}
+
+.review-movie-genre{
+color: black !important;
+margin: 13px;
+}

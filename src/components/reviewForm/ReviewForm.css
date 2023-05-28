@@ -1,0 +1,25 @@
+.review-form-wrapper{
+  display:flex;
+  flex-direction:column;
+  height:100%
+}
+.review-form-title{
+  font-size: 20px;
+  color:white;
+  font-family: 'RobotoMedium';
+}
+.review-form-input{
+  flex-grow: 1;
+}
+.review-form-button{
+  transition: all .3s linear;
+  border:1px solid gold;
+  color:white;
+  text-transform: uppercase;
+  font-family: 'RobotoMedium';
+  padding: 3px 10px;
+}
+.review-form-button:hover{
+  border:1px solid white;
+  color:gold;
+}
