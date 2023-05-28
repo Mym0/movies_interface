@@ -5,6 +5,7 @@
   font-family: 'Quicksand', Arial, Helvetica, sans-serif;
 }
 body {
+  overflow-x: hidden;
   padding: 0;
   margin: 0;
 }
@@ -14,4 +15,44 @@ body {
   min-height: 100vh;
   background-color: black;
   color: white;
+}
+@font-face {
+  font-family: RobotoLight;
+  src: url(./assets/fonts/Cairo/Cairo-Light.ttf);
+}
+@font-face {
+  font-family: RobotoRegular;
+  src: url(./assets/fonts/Cairo/Cairo-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(./assets/fonts/Cairo/Cairo-Bold.ttf);
+}
+@font-face {
+  font-family: RobotoSemiBold;
+  src: url(./assets/fonts/Cairo/Cairo-SemiBold.ttf);
+}
+@font-face {
+  font-family: RobotoBlack;
+  src: url(./assets/fonts/Cairo/Cairo-Black.ttf);
+}
+@font-face {
+  font-family: RobotoMedium;
+  src: url(./assets/fonts/Cairo/Cairo-Medium.ttf);
+}
+button{
+  border: 0 ;
+  outline: 0 !important;
+  background-color: transparent;
+}
+ul{
+  list-style-type:none!important;;
+  margin:0!important;;
+  padding: 0 !important;;
+}
+a{
+  text-decoration:none!important;;
+}
+p{
+  margin: 0!important;;
 }
