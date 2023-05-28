@@ -8,6 +8,7 @@ const authneticateUserApi = async (userData) => {
     return res.data;
   } catch (err) {
     console.log(err);
+    return err
   }
 };
 
